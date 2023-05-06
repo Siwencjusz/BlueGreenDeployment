@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "Development" ]
 env:
-  AZURE_WEBAPP_NAME: Bill-BGD-slots  
-  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots-Bill-BGD-DEV
+  AZURE_WEBAPP_NAME: BillBGD 
+  AZURE_WEBAPP_SLOT_NAME: billbgd/dev
   AZURE_CONTAINER_REGISTRY_LOGIN: billbgdregistry.azurecr.io
   AZURE_CONTAINER_REGISTRY_NAME: billbgdregistry.azurecr.io/bgdbill/dev
 jobs:
