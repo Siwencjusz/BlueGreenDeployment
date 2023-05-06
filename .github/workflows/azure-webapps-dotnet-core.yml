@@ -29,7 +29,7 @@ jobs:
          
     - name: Build and push the image tagged with the git commit hash
       run: |
-        cd .
+        cd ./BlueGreenDeployment
         pwd         
         ls -l
         docker build . -t bgdbill/dev:${{ github.sha }} -f Dockerfile
