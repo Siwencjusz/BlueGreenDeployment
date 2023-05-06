@@ -4,10 +4,8 @@ on:
   push:
     branches: [ "Development" ]
 env:
-  AZURE_WEBAPP_NAME_ALT: BillBGD 
-  AZURE_WEBAPP_SLOT_NAME_ALT: billbgd/dev
   AZURE_WEBAPP_NAME: Bill-BGD-slots  
-  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots-Bill-BGD-DEV
+  AZURE_WEBAPP_SLOT_NAME: Bill-BGD-DEV
   AZURE_CONTAINER_REGISTRY_LOGIN: billbgdregistry.azurecr.io
   AZURE_CONTAINER_REGISTRY_NAME: billbgdregistry.azurecr.io/bgdbill/dev
 jobs:
@@ -41,11 +39,12 @@ jobs:
         docker push ${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}
 
     - name: Update image tag on the Azure Web App
-      id: deploy-to-webapp
+      id: deploy-to-webapp-slot
       uses:  azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}           
         images: '${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}'
+        slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
         
     - name: logout
       run: |
