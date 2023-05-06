@@ -26,8 +26,8 @@ jobs:
       run: |
         pwd         
         ls -l
-        docker build . -t bgdbill_dev:${{ github.sha }} -f Dockerfile
-        docker push billbgdregistry.azurecr.io/bgdbill_dev:${{ github.sha }}
+        docker build . -t billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }} -f Dockerfile
+        docker push billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }}
 
     - name: Update image tag on the Azure Web App
       id: deploy-to-webapp
