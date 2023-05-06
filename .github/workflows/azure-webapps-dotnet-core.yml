@@ -19,7 +19,9 @@ jobs:
       uses: azure/login@v1
       with:
        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+    - run: |
+        az webapp list --query "[?state=='Running']"        
+        
     - uses: azure/docker-login@v1
       with:
         login-server: ${{ env.AZURE_CONTAINER_REGISTRY_LOGIN}}
@@ -37,7 +39,8 @@ jobs:
       id: deploy-to-webapp
       uses:  azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}         
+        slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
         images: '${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}'
         
     - name: logout
