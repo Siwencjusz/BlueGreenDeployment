@@ -3,7 +3,11 @@ name: Build and deploy a container image to Azure Web Apps
 on:
   push:
     branches: [ "Development" ]
-
+env:
+  AZURE_WEBAPP_NAME: Bill-BGD-slots    
+  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots-Bill-BGD-DEV
+  AZURE_CONTAINER_REGISTRY_LOGIN: billbgdregistry.azurecr.io
+  AZURE_CONTAINER_REGISTRY_NAME: billbgdregistry.azurecr.io/bgdbill/dev
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
 
     - uses: azure/docker-login@v1
       with:
-        login-server: billbgdregistry.azurecr.io
+        login-server: ${{ env.AZURE_CONTAINER_REGISTRY_LOGIN}}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}   
   
@@ -26,13 +30,13 @@ jobs:
       run: |
         pwd         
         ls -l
-        docker build . -t billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }} -f Dockerfile
-        docker push billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }}
+        docker build . -t ${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }} -f Dockerfile
+        docker push ${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}
 
     - name: Update image tag on the Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'Bill-BGD-slots'
-        slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
-        images: 'billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }}'
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
+        images: '${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}'
