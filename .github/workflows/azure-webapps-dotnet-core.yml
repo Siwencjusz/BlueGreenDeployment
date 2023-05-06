@@ -23,12 +23,12 @@ jobs:
 
     - name: Build and push the image tagged with the git commit hash
       run: |
-        docker build . -t contoso/demo:${{ github.sha }}
-        docker push contoso/demo:${{ github.sha }}
+        docker build . -t BGD-BILL/demo:${{ github.sha }}
+        docker push BGD-BILL/demo:${{ github.sha }}
 
     - name: Update image tag on the Azure Web App
       id: deploy-to-webapp
-      uses: azure/webapps-container-deploy@v1
+      uses: azure/webapps-deploy@v2
       with:
         app-name: 'Bill-BGD-slots'
         slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
