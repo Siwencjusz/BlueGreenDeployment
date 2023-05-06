@@ -35,4 +35,4 @@ jobs:
       with:
         app-name: 'Bill-BGD-slots'
         slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
-        images: 'bgdbill/dev:${{ github.sha }}'
+        images: 'billbgdregistry.azurecr.io/bgdbill/dev:${{ github.sha }}'
