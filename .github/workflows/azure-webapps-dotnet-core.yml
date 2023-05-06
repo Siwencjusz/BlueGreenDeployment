@@ -1,0 +1,36 @@
+name: Build and deploy a container image to Azure Web Apps
+
+on:
+  push:
+    branches: [ "Development" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@main
+
+    - name: Log in with Azure
+      uses: azure/actions/login@v1
+      with:
+       creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: billbgdregistry.azurecr.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push the image tagged with the git commit hash
+      run: |
+        docker build . -t bgdbill/dev:${{ github.sha }}
+        docker push bgdbill/dev:${{ github.sha }}
+
+    - name: Update image tag on the Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'Bill-BGD-slots'
+        slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
+        images: 'contoso/demo:${{ github.sha }}'
