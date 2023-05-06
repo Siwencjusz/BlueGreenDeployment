@@ -11,10 +11,10 @@ jobs:
     steps:
     - uses: actions/checkout@main
 
-    -name: Authenticate using a Service Principal
+    - name: Log in with Azure
       uses: azure/actions/login@v1
       with:
-        creds: ${{ secrets.AZURE_SP }}
+       creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - uses: azure/container-actions/docker-login@v1
       with:
@@ -26,10 +26,10 @@ jobs:
         docker build . -t contoso/demo:${{ github.sha }}
         docker push contoso/demo:${{ github.sha }}
 
-      - name: Update image tag on the Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-container-deploy@v1
-        with:
-          app-name: 'Bill-BGD-slots'
-          slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
-          images: 'contoso/demo:${{ github.sha }}'
+    - name: Update image tag on the Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-container-deploy@v1
+      with:
+        app-name: 'Bill-BGD-slots'
+        slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
+        images: 'contoso/demo:${{ github.sha }}'
