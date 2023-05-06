@@ -4,8 +4,10 @@ on:
   push:
     branches: [ "Development" ]
 env:
-  AZURE_WEBAPP_NAME: BillBGD 
-  AZURE_WEBAPP_SLOT_NAME: billbgd/dev
+  AZURE_WEBAPP_NAME_ALT: BillBGD 
+  AZURE_WEBAPP_SLOT_NAME_ALT: billbgd/dev
+  AZURE_WEBAPP_NAME: Bill-BGD-slots  
+  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots-Bill-BGD-DEV
   AZURE_CONTAINER_REGISTRY_LOGIN: billbgdregistry.azurecr.io
   AZURE_CONTAINER_REGISTRY_NAME: billbgdregistry.azurecr.io/bgdbill/dev
 jobs:
@@ -42,7 +44,8 @@ jobs:
       id: deploy-to-webapp
       uses:  azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}         
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}      
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
         slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
         images: '${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}'
         
