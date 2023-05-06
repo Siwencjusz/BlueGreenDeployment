@@ -24,6 +24,7 @@ jobs:
 
     - name: list elements
       run: |
+         pwd
          ls -l
          ls -l ./BlueGreenDeployment
          
