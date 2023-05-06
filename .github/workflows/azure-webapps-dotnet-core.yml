@@ -24,7 +24,7 @@ jobs:
 
     - name: Build and push the image tagged with the git commit hash
       run: |
-        docker build . -t BGD-BILL/demo:${{ github.sha }}
+        docker build . -t bgdbill/demo:${{ github.sha }}
         docker push BGD-BILL/demo:${{ github.sha }}
 
     - name: Update image tag on the Azure Web App
