@@ -25,7 +25,7 @@ jobs:
     - name: list elements
       run: |
          ls -l
-         ls -l .
+         ls -l ./BlueGreenDeployment
          
     - name: Build and push the image tagged with the git commit hash
       run: |
