@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@Development
+    - uses: actions/checkout@main
 
     - name: Log in with Azure
       uses: azure/actions/login@v1
