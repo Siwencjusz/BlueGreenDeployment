@@ -35,7 +35,7 @@ jobs:
 
     - name: Update image tag on the Azure Web App
       id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
+      uses:  azure/webapps-container-deploy@v1
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
         slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
