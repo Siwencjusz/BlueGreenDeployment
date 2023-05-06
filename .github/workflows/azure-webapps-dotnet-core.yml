@@ -30,6 +30,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-container-deploy@v1
         with:
-          app-name: '<your-webapp-name>'
-          slot-name: '<your-slot-name>'
+          app-name: 'Bill-BGD-slots'
+          slot-name: 'bill-bgd-slots-Bill-BGD-DEV'
           images: 'contoso/demo:${{ github.sha }}'
