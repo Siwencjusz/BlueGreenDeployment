@@ -44,9 +44,7 @@ jobs:
       id: deploy-to-webapp
       uses:  azure/webapps-deploy@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}      
-        publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILEDEV }}
-        slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}           
         images: '${{ env.AZURE_CONTAINER_REGISTRY_NAME}}:${{ github.sha }}'
         
     - name: logout
