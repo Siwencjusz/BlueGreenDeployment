@@ -7,7 +7,7 @@ env:
   AZURE_WEBAPP_NAME_ALT: BillBGD 
   AZURE_WEBAPP_SLOT_NAME_ALT: billbgd/dev
   AZURE_WEBAPP_NAME: Bill-BGD-slots  
-  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots-Bill-BGD-DEV
+  AZURE_WEBAPP_SLOT_NAME: bill-bgd-slots/Bill-BGD-DEV
   AZURE_CONTAINER_REGISTRY_LOGIN: billbgdregistry.azurecr.io
   AZURE_CONTAINER_REGISTRY_NAME: billbgdregistry.azurecr.io/bgdbill/dev
 jobs:
