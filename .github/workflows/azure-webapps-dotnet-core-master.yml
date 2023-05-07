@@ -1,4 +1,4 @@
-name: Build and deploy a container image to Azure Web Apps
+name: Build and deploy a container image to Azure Web Apps - master slot
 
 on:
   push:
